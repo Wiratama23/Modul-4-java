@@ -7,9 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
     public static void mulai() {
         Random rand = new Random();
-        Hero h1 = new Assasin(rand.nextInt(11));
-        Hero h2 = new Tank(rand.nextInt(11));
-        Hero h3 = new Mage(rand.nextInt(11));
+        Hero h1 = new Assasin(rand.nextInt(10)+1);
+        Hero h2 = new Tank(rand.nextInt(10)+1);
+        Hero h3 = new Mage(rand.nextInt(10)+1);
 
         int round = 0;
         int pick_hero1, pick_hero2;
