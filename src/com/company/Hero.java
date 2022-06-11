@@ -3,22 +3,23 @@ package com.company;
 
 public abstract class Hero{
     double healthPoint, attackDamage, defense, realDamage;
+    String name;
     int level = 1;
     boolean lifeStatus = true;
 
 
+     void attack(Hero target){
+         System.out.println("\n\n==="+ getName() + " Turn ===\n"); spawnIntro();
+         reviewDamage(getAttackDamage(), target.getDefense());
 
-     void attack(String h1_name, String h2_name, double h1_atk,
-                 double h2_def, double h2_health){
-         System.out.println("\n\n==="+ h1_name + " Turn ===\n"); spawnIntro();
-         reviewDamage(h1_atk, h2_def);
-         setRealDamage(h2_health - getRealDamage());
-
-         if(getRealDamage() <= 0){
-             setRealDamage(0);
+         if(getRealDamage() >= target.getHealthPoint()){
+             target.setHealthPoint(0);
+             target.setLifeStatus(false);
+         }else{
+             target.setHealthPoint(target.getHealthPoint() - getRealDamage());
          }
-         System.out.printf(h2_name + " HP Remaining\t: %.1f\n",getRealDamage());
 
+         System.out.printf(target.getName() + " HP Remaining\t: %.1f\n",target.getHealthPoint());
      }
 
      void reviewDamage(double attackDamage, double defense){
@@ -28,8 +29,8 @@ public abstract class Hero{
      abstract void spawnIntro();
 //     abstract void h_Stats(int level);
 
-     void checkStatus(String hero){
-         System.out.println("==="+hero+"==="); spawnIntro();
+     void checkStatus(){
+         System.out.println("==="+getName()+"==="); spawnIntro();
          System.out.printf("Hero Level: %d\n", getLevel());
          System.out.printf("Attack damage\t : %.1f \t\t Life Status : %b\nHealth point\t : %.1f\t\t Defense\t : %.1f\n\n",
                  getAttackDamage(),getLifeStatus(),getHealthPoint(),getDefense());
@@ -83,6 +84,14 @@ public abstract class Hero{
 
     public void setLifeStatus(boolean lifeStatus) {
         this.lifeStatus = lifeStatus;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

@@ -4,6 +4,7 @@ public class Tank extends Hero {
 
     double healthPoint = 7000,defense = 500,attackDamage = 500;
     final double upatk = 20, upHP = 200, upDef = 15;
+    String name = "Tank";
 
 
     Tank(int level) {
@@ -11,6 +12,7 @@ public class Tank extends Hero {
         setDefense(defense);
         setHealthPoint(healthPoint);
         setAttackDamage(attackDamage);
+        setName(name);
 
         for(int i = 1; i<level; i++){
             setAttackDamage(getAttackDamage() + upatk);

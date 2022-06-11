@@ -7,9 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
     public static void mulai() {
         Random rand = new Random();
-        Assasin h1 = new Assasin(rand.nextInt(11));
-        Tank h2 = new Tank(rand.nextInt(11));
-        Mage h3 = new Mage(rand.nextInt(11));
+        Hero h1 = new Assasin(rand.nextInt(11));
+        Hero h2 = new Tank(rand.nextInt(11));
+        Hero h3 = new Mage(rand.nextInt(11));
 
         int round = 0;
         int pick_hero1, pick_hero2;
@@ -23,34 +23,20 @@ public class Main {
 
             if(pick_hero1 == 1 && pick_hero2 == 2 ||
                     pick_hero1 == 2 && pick_hero2 == 1){
-                h1.checkStatus("Assasin");
-                h2.checkStatus("Tank");
+                h1.checkStatus();
+                h2.checkStatus();
                 do {
                     round++;
                     System.out.printf("\n=========== Round  %d ===========", round);
 
                     //Assasin Turn
                     if (h1.getLifeStatus()) {
-                        h1.attack("Assasin", "Tank",
-                                h1.getAttackDamage(), h2.getDefense(),
-                                h2.getHealthPoint());
-                        h2.setHealthPoint(h1.getRealDamage());
-
-                        if (h2.getHealthPoint() <= 0) {
-                            h2.setLifeStatus(false);
-                        }
+                        h1.attack(h2);
                     }
 
                     //Tank Turn
                     if (h2.getLifeStatus()) {
-                        h2.attack("Tank", "Assasin",
-                                h2.getAttackDamage(), h1.getDefense(),
-                                h1.getHealthPoint());
-                        h1.setHealthPoint(h2.getRealDamage());
-
-                        if (h1.getHealthPoint() <= 0) {
-                            h1.setLifeStatus(false);
-                        }
+                        h2.attack(h1);
                     }
 
                 } while (h1.getLifeStatus() && h2.getLifeStatus());
@@ -63,34 +49,20 @@ public class Main {
                 //end of match
             } else if(pick_hero1 == 1 && pick_hero2 == 3 ||
                     pick_hero1 == 3 && pick_hero2 == 1){
-                h1.checkStatus("Assasin");
-                h3.checkStatus("Mage");
+                h1.checkStatus();
+                h3.checkStatus();
                 do {
                     round++;
                     System.out.printf("\n=========== Round  %d ===========", round);
 
                     //Assasin Turn
                     if (h1.getLifeStatus()) {
-                        h1.attack("Assasin", "Mage",
-                                h1.getAttackDamage(), h3.getDefense(),
-                                h3.getHealthPoint());
-                        h3.setHealthPoint(h1.getRealDamage());
-
-                        if (h3.getHealthPoint() <= 0) {
-                            h3.setLifeStatus(false);
-                        }
+                        h1.attack(h3);
                     }
 
                     //Mage Turn
                     if (h3.getLifeStatus()) {
-                        h3.attack("Mage", "Assasin",
-                                h3.getAttackDamage(), h1.getDefense(),
-                                h1.getHealthPoint());
-                        h1.setHealthPoint(h3.getRealDamage());
-
-                        if (h1.getHealthPoint() <= 0) {
-                            h1.setLifeStatus(false);
-                        }
+                        h3.attack(h1);
                     }
                 } while (h1.getLifeStatus() && h3.getLifeStatus());
                 System.out.println("\n========= Match Result =========");
@@ -102,34 +74,20 @@ public class Main {
                 //end of match
             } else if(pick_hero1 == 2 && pick_hero2 == 3 ||
                     pick_hero1 == 3 && pick_hero2 == 2){
-                h2.checkStatus("Tank");
-                h3.checkStatus("Mage");
+                h2.checkStatus();
+                h3.checkStatus();
                 do {
                     round++;
                     System.out.printf("\n=========== Round  %d ===========", round);
 
                     //Assasin Turn
                     if (h2.getLifeStatus()) {
-                        h2.attack("Tank", "Mage",
-                                h2.getAttackDamage(), h3.getDefense(),
-                                h3.getHealthPoint());
-                        h3.setHealthPoint(h2.getRealDamage());
-
-                        if (h3.getHealthPoint() <= 0) {
-                            h3.setLifeStatus(false);
-                        }
+                        h2.attack(h3);
                     }
 
                     //Mage Turn
                     if (h3.getLifeStatus()) {
-                        h3.attack("Mage", "Tank",
-                                h3.getAttackDamage(), h2.getDefense(),
-                                h2.getHealthPoint());
-                        h2.setHealthPoint(h3.getRealDamage());
-
-                        if (h2.getHealthPoint() <= 0) {
-                            h2.setLifeStatus(false);
-                        }
+                        h3.attack(h2);
                     }
 
                 } while (h2.getLifeStatus() && h3.getLifeStatus());
